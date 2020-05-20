@@ -18,20 +18,27 @@ public:
     //controlling tree keys
     void insert(const int a){//inserting num
         head=AVL_TREE_NODE_H::insert(head,a);
+        size++;
     }
     void insert(const vector<int> a){//inserting mass
         for(unsigned int i=0;i<a.size();++i) {
             head = AVL_TREE_NODE_H::insert(head, a[i]);
         }
+        size+=a.size();
     }
     void remove_element(const int a){//removing num
         head = AVL_TREE_NODE_H::remove(head,a);
+        size--;
     }
     void remove_element(const vector<int> a){//removing mass
         for(unsigned int i=0;i<a.size();++i) {
             head = AVL_TREE_NODE_H::remove(head, a[i]);
         }
+        size-=a.size();
     }
+    unsigned int amount(){
+        return size;
+    };
     AVL &operator =(const AVL& a){
         this->head=a.head;
         this->size=a.size;
@@ -52,6 +59,11 @@ public:
 };
 
 ostream& operator<<(ostream& os,AVL& a){
+    if(a.show_data()==nullptr)
+    {
+        os<< "empty";
+        return os;
+    }
     os<<*a.show_data();
     return os;
 };
