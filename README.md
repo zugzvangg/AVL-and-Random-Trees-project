@@ -1,1 +1,1 @@
-Zugzvangg's and mrpepperbest's Trees as a second semester project of DASR MIPT
+Zugzvangg's and mrpepperbest's project of researching and comparing the time-values of different operations of random and AVL trees
