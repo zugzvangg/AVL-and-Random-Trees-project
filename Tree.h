@@ -97,9 +97,9 @@ template <typename T>double Tree<T>::TESTING_FINDING_ELEMENT(int n)
 template <typename T>void Tree<T>::MEGA_BANG(int start,int step, int cycles){
     ofstream fout("info.dat");
     cout<< "insert delete min max search"<<endl;
-    fout<< "insert delete min max search"<<endl;
+    fout<< "keys insert delete min max search"<<endl;
     for(int i=start;i<(start+step*cycles);i+=step) {
-        fout << endl << setprecision(10) << this->TESTING_INSERT(i) << " "           //insert output
+        fout << endl << setprecision(10) <<  i << " " <<this->TESTING_INSERT(i) << " "           //insert output
              << this->TESTING_DELETING(i) << " "                                        //delete output
              << this->TESTING_MAX_ELEMENT(i) << " "                                     //max output
              << this->TESTING_MIN_ELEMENT(i) << " "                                     //min output

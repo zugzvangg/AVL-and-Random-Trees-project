@@ -24,8 +24,8 @@ private:
 //destruction_func
 static void destroy_node(Node<T>* node){
     if(node){
-        destroy_node(node->left);
-        destroy_node(node->right);
+        destroy_node(node->l);
+        destroy_node(node->r);
         delete node;
     }
 }
@@ -39,11 +39,11 @@ AVL(AVL<T> const& other):head(nullptr){
     Node<T> const* cur=other.head;
     while(cur){
         insert(cur->key);
-        if(cur->right){
-            remaining.push_back(cur->right);
+        if(cur->r){
+            remaining.push_back(cur->r);
         }
-        if(cur->left){
-            cur=cur->left;
+        if(cur->l){
+            cur=cur->l;
         }
         else if(remaining.empty()){
             break;
@@ -191,18 +191,18 @@ ostream& operator <<(ostream& os,AVL& a){
 //interface methods realising
 template<typename T> T AVL<T>::FIND_MIN_ELEMENT(){
     Node<T> *current = head;
-    while(current->left!= nullptr)
+    while(current->l!= nullptr)
     {
-        current=current->left;
+        current=current->l;
     }
     cout << "Minimal element in the tree = " << current->key << endl;
     return current->key;
 };                          //minimal element
 template<typename T> T AVL<T>::FIND_MAX_ELEMENT(){
     Node<T> *current = head;
-    while(current->right!=nullptr)
+    while(current->r!=nullptr)
     {
-        current=current->right;
+        current=current->r;
     }
     cout << "Maximal element in the tree = " << current->key << endl;
     return current->key;
@@ -214,9 +214,9 @@ template<typename T> Node<T>* AVL<T>::FIND_NODE(T data){
             cout << "There is an element = " << data << " in the tree"<<endl;
             return (current);
         } else if (data < current->key) {
-            current = current->left;
+            current = current->l;
         } else {
-            current = current->right;
+            current = current->r;
         }
     cout << "There is no such element"<<endl;
     return nullptr;

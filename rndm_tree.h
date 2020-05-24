@@ -1,4 +1,3 @@
-
 #include <ctime>
 #include <iostream>
 #include <algorithm>
@@ -6,72 +5,59 @@
 #include <vector>
 #include <chrono>
 #include "Timer.h"
+#include "AVL_Node.h"
+#include "Tree.h"
+#include <iomanip>
+#include <fstream>
 
 using namespace std;
-typedef int T;
 
 #ifndef RED_BLACK_TREE_RANDOM_TREE_H
 #define RED_BLACK_TREE_RANDOM_TREE_H
 
-
-struct Node // структура для представления узлов дерева
-{
-    T data;
-    int s;
-    Node* l;
-    Node* r;
-};
-
-class RandomTree {
+template <typename T>
+class RandomTree{
 private:
-    vector<Node *> leaves;
-    Node *root;
+    Node<T> *root;
     int number_of_elements;
-
 
     int getNumberOfElements()
     {
         return root->s;
     }
 
-
-    Node* getRoot() //указатель на корень
-    {
-        return root;
-    }
-
-    static Node* findRecursion(Node* rec, int data) // рекурсивный поиск
+    static Node<T>* findRecursion(Node<T>* rec, int key) // рекурсивный поиск
     {
         if( rec == nullptr )
         {
             cout << "No of this element in the tree"<<endl;
             return nullptr;
         }
-        if( data == rec->data ){
+        if( key == rec->key ){
             cout << "Your element is found!"<<endl;
             return rec;}
-        if( data < rec->data )
-            return findRecursion(rec->l,data);
+        if( key < rec->key )
+            return findRecursion(rec->l,key);
         else
-            return findRecursion(rec->r,data);
+            return findRecursion(rec->r,key);
     }
 
 
-    static int getsize(Node* nd) //получить размер
+    static int getsize(Node<T>* nd) //получить размер
     {
         if( nd== nullptr)
         {return 0;}
         else return nd->s;
     }
 
-    static void SetSize(Node* p) // рекурсивно задать размер дерева
+    static void SetSize(Node<T>* p) // рекурсивно задать размер дерева
     {
         p->s = getsize(p->l)+getsize(p->r)+1;
     }
 
-    static Node* RightRotation(Node* x) //правое вращение
+    static Node<T>* RightRotation(Node<T>* x) //правое вращение
     {
-        Node* y = x->l;
+        Node<T>* y = x->l;
         x->l = y->r;
         y->r = x;
         y->s = x->s;
@@ -79,41 +65,41 @@ private:
         return y;
     }
 
-    static Node* LeftRotation(Node* x) //левое вращение
+    static Node<T>* LeftRotation(Node<T>* x) //левое вращение
     {
-        Node* y = x->r;
+        Node<T>* y = x->r;
         x->r = y->l;
         y->l = x;
         y->s = x->s;
         SetSize(x);
         return y;
     }
-    static Node* InsertRoot(Node* p, T data) //вставка корня(одна из вспомогательных функций)
+    static Node<T>* InsertRoot(Node<T>* p, T key) //вставка корня(одна из вспомогательных функций)
     {
         if( p== nullptr )
         {
-            Node* nd = new Node;
+            Node<T>* nd = new Node<T>(0);
             nd->s=1;
-            nd->data=data;
+            nd->key=key;
             nd->r= nullptr;
             nd->l= nullptr;
             return nd;
         }else
         {
-            if( data<p->data )
+            if( key<p->key )
             {
-                p->l = InsertRoot(p->l,data);
+                p->l = InsertRoot(p->l,key);
                 return RightRotation(p);
             }
             else
             {
-                p->r = InsertRoot(p->r,data);
+                p->r = InsertRoot(p->r,key);
                 return LeftRotation(p);
             }
         }
     }
 
-    static Node* join(Node* p, Node* q) // слияние деревьев
+    static Node<T>* join(Node<T>* p, Node<T>* q) // слияние деревьев
     {
         if( p== nullptr ) return q;
         if( q== nullptr ) return p;
@@ -137,44 +123,49 @@ public:
         delete root;
     }
 
-    RandomTree(T data) {
-        root = new Node;
+    RandomTree(T key) {
+        root = new Node<T>(0);
         root->r = nullptr;
         root->l = nullptr;
-        root->data = data;
+        root->key = key;
         root->s=1;
         number_of_elements = 1;
 
     }
 
+    Node<T>* getRoot() //указатель на корень
+    {
+        return root;
+    }
+
     T FIND_MIN_ELEMENT() //минимальный элемент
     {
-        Node *current = root->r;
+        Node<T> *current = root->r;
         while(current->l!= nullptr)
         {
             current=current->l;
         }
-        cout << "Minimal element in the tree = " << current->data << endl<<endl;
-        return current->data;
+        cout << "Minimal element in the tree = " << current->key << endl<<endl;
+        return current->key;
     }
     T FIND_MAX_ELEMENT() //максимальный элемент
     {
-        Node *current = root;
+        Node<T> *current = root;
         while(current->r!=nullptr)
         {
             current=current->r;
         }
-        cout << "Maximal element in the tree = " << current->data << endl;
-        return current->data;
+        cout << "Maximal element in the tree = " << current->key << endl;
+        return current->key;
     }
 
-    Node *FIND_NODE(T data) { //поиск по ключу
-        Node *current = root;
+    Node<T> *FIND_NODE(T key) { //поиск по ключу
+        Node<T> *current = root;
         while (current != nullptr)
-            if (data == current->data) {
-                cout << "There is an element = " << data << " in the tree"<<endl;
+            if (key == current->key) {
+                cout << "There is an element = " << key << " in the tree"<<endl;
                 return (current);
-            } else if (data < current->data) {
+            } else if (key < current->key) {
                 current = current->l;
             } else {
                 current = current->r;
@@ -183,51 +174,51 @@ public:
         return nullptr;
     }
 
-
-    static Node* INSERT(Node* p, T data) //вставка большими буквами необходимые функции - остальные вспомогательные
+    static Node<T>* INSERT(Node<T>* p, T key) //вставка большими буквами необходимые функции - остальные вспомогательные
     {
         if( p== nullptr )
         {
-            Node* nd = new Node;
+            Node<T>* nd = new Node<T>(0);
             nd->s=1;
-            nd->data=data;
+            nd->key=key;
             nd->r= nullptr;
             nd->l= nullptr;
             return nd;
         }
         if( rand()%(p->s+1)==0 )
-            return InsertRoot(p,data);
-        if( p->data>data )
-            p->l = INSERT(p->l,data);
+            return InsertRoot(p,key);
+        if( p->key>key )
+            p->l = INSERT(p->l,key);
         else
-            p->r = INSERT(p->r,data);
+            p->r = INSERT(p->r,key);
         SetSize(p);
         return p;
+
     }
 
-    static Node* DELETE(Node* nd, int data) // удаление элемента
+    static Node<T>* DELETE(Node<T>* nd, int key) // удаление элемента
     {
         if( nd== nullptr )
         {
             cout << "It's nullptr, it's impossible to delete"<<endl;
             return nd;
         }
-        if( nd->data==data )
+        if( nd->key==key )
         {
-            Node* nd2 = join(nd->l,nd->r);
+            Node<T>* nd2 = join(nd->l,nd->r);
             delete nd;
-            cout << "Element = "<< data << " is deleted" << endl<<endl;
+            cout << "Element = "<< key << " is deleted" << endl<<endl;
             return nd2;
         }
-        else if( data<nd->data )
-            nd->l = DELETE(nd->l,data);
+        else if( key<nd->key )
+            nd->l = DELETE(nd->l,key);
         else
-            nd->r = DELETE(nd->r,data);
+            nd->r = DELETE(nd->r,key);
         return nd;
 
     }
 
-    void TESTING_INSERT(int n)
+    double TESTING_INSERT(int n)
     {
         Timer t;
         for(int i=0; i<n; i++) {
@@ -237,9 +228,10 @@ public:
         Timer a;
         INSERT(getRoot(), n);
         cout << "Time of inserting of 1 element into the tree of " << n << " elements is " << a.elapsed() << " ms " << endl<<endl;
+        return a.elapsed();
     }
 
-    void TESTING_DELETING(int n)
+    double TESTING_DELETING(int n)
     {
         for(int i=0; i<n; i++) {
             INSERT(getRoot(), i);
@@ -248,9 +240,10 @@ public:
         INSERT(getRoot(), n);
         DELETE(getRoot(), n-1);
         cout << "Time of deleting of an element is " << a.elapsed()  << "ms" << endl<<endl;
+        return a.elapsed();
     }
 
-    void TESTING_MAX_ELEMENT(int n)
+    double TESTING_MAX_ELEMENT(int n)
     {
         unsigned int start_time =  clock();
         for(int i=0; i<n; i++) {
@@ -259,9 +252,10 @@ public:
         Timer a;
         FIND_MAX_ELEMENT();
         cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
+        return a.elapsed();
     }
 
-    void TESTING_MIN_ELEMENT(int n)
+    double TESTING_MIN_ELEMENT(int n)
     {
         unsigned int start_time =  clock();
         for(int i=0; i<n; i++) {
@@ -270,9 +264,10 @@ public:
         Timer a;
         FIND_MIN_ELEMENT();
         cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
+        return a.elapsed();
     }
 
-    void TESTING_FINDING_ELEMENT(int n)
+    double TESTING_FINDING_ELEMENT(int n)
     {
         unsigned int start_time =  clock();
         for(int i=0; i<n; i++) {
@@ -281,7 +276,23 @@ public:
         Timer a;
         FIND_NODE(n-1);
         cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
+        return a.elapsed();
     }
+
+    double MEGA_BANG(int start,int step, int cycles){
+        ofstream fout("info.dat");
+        cout<< "insert delete min max search"<<endl;
+        fout << "testing random tree" << endl;
+        fout<< " keys insert delete min max search"<<endl;
+        for(int i=start;i<(start+step*cycles);i+=step) {
+            fout << endl << setprecision(10) << i << " "<< this->TESTING_INSERT(i) << " "           //insert output
+                 << this->TESTING_DELETING(i) << " "                                        //delete output
+                 << this->TESTING_MAX_ELEMENT(i) << " "                                     //max output
+                 << this->TESTING_MIN_ELEMENT(i) << " "                                     //min output
+                 << this->TESTING_FINDING_ELEMENT(i);                                       //searching output
+        };
+        fout.close();
+    } //total checkout! outputting into "info.dat"
 
 };
 
