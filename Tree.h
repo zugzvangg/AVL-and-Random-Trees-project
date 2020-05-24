@@ -17,9 +17,9 @@ using namespace std;
 template <typename T> class Tree {
 public:
 //interface methods;
-    virtual T FIND_MIN_ELEMENT(){};                          //minimal element
-    virtual T FIND_MAX_ELEMENT(){};                          //maximal element
-    virtual Node<T>* FIND_NODE(T data){};                    //search with key
+    virtual T FIND_MIN_ELEMENT(){return 0;};                          //minimal element
+    virtual T FIND_MAX_ELEMENT(){return 0;};                          //maximal element
+    virtual Node<T>* FIND_NODE(T data){return nullptr;};                    //search with key
     virtual void INSERT(T data){};                           //insertion
     virtual void DELETE(T data){};                           //deleting
 //interface tests //enter amount of elements for every test
