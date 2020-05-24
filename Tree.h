@@ -35,63 +35,73 @@ public:
 //test funcs declaration
 template <typename T>double Tree<T>::TESTING_INSERT(int n)
 {
+    double time;
     Timer t;
     for(int i=0; i<n; i++) {
         INSERT(i);
     }
+    time=t.elapsed();
     cout << "Time of inserting of " << n << " elements is " <<  t.elapsed() << " s "<< endl;
     Timer a;
     INSERT(n);
     cout << "Time of inserting of 1 element into the tree of " << n << " elements is " << a.elapsed() << " ms " << endl<<endl;
-    return a.elapsed();
+    return time;
 }         //insertion test
 
 template <typename T>double Tree<T>::TESTING_DELETING(int n)
 {
+    double time;
     for(int i=0; i<n; i++) {
         INSERT(i);
     }
-    Timer a;
     INSERT(n);
+    Timer a;
     DELETE(n-1);
+    time=a.elapsed();
     cout << "Time of deleting of an element is " << a.elapsed()  << "ms" << endl<<endl;
-    return a.elapsed();
+    return time;
 }        //deleting test
 
 template <typename T>double Tree<T>::TESTING_MAX_ELEMENT(int n)
 {
+    double time;
     unsigned int start_time =  clock();
     for(int i=0; i<n; i++) {
         INSERT(i);
     }
     Timer a;
     FIND_MAX_ELEMENT();
+    time=a.elapsed();
     cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
-    return a.elapsed();
+    return time;
 }     //max test
 
 template <typename T>double Tree<T>::TESTING_MIN_ELEMENT(int n)
 {
+    double time;
     unsigned int start_time =  clock();
     for(int i=0; i<n; i++) {
         INSERT(i);
     }
     Timer a;
     FIND_MIN_ELEMENT();
+    time=a.elapsed();
     cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
-    return a.elapsed();
+    return time;
 }     //min test
 
 template <typename T>double Tree<T>::TESTING_FINDING_ELEMENT(int n)
 {
+    double time;
     unsigned int start_time =  clock();
     for(int i=0; i<n; i++) {
         INSERT(i);
     }
     Timer a;
     FIND_NODE(n-1);
+    time=a.elapsed();
     cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
-    return a.elapsed();
+    return time;
 } //search test
 
 template <typename T>void Tree<T>::MEGA_BANG(int start,int step, int cycles){
