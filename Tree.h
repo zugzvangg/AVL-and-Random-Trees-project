@@ -1,6 +1,7 @@
 
 #ifndef TREE_H
 #define TREE_H
+#include "Beautiful_print.h"
 #include "Timer.h"
 #include <fstream>
 #include "AVL_Node.h"

@@ -75,6 +75,8 @@ void remove_minimal(){
      Node<T>* FIND_NODE(T data);                    //search with key
      void INSERT(T data);                           //insertion
      void DELETE(T data);                           //deleting
+//doing beautiful pic
+    void Print_beauty();
 };
 //methods realising
 //moderating funcs
@@ -154,5 +156,6 @@ template<typename T> void AVL<T>::INSERT(T data){
 template<typename T> void AVL<T>::DELETE(T data){
     this->remove_element(data);
 };                           //deleting
-
+//printing
+template<typename T> void AVL<T>::Print_beauty() {print_tree(this->head);};
 #endif //AVL_TREE_AVL_H

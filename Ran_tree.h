@@ -294,6 +294,10 @@ public:
         };
         fout.close();
     } //total checkout! outputting into "info.dat"
+    //doing beautiful pic
+    void Print_beauty(){
+        print_tree(this->root);
+    };
 
 };
 
