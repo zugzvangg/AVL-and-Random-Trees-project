@@ -10,6 +10,8 @@
 #include <bits/unique_ptr.h>
 #include <vector>
 #include <algorithm>
+#include "SETTEST.h"
+#include <set>
 using namespace std;
 int main() {
     cout<< "Tree test!"<<endl;
@@ -22,5 +24,7 @@ for(int i=0;i<20;++i){
 b.Print_beauty();
 cout<<endl;
 a.Print_beauty();
+set<int> q;
+MEGA_BANG(1,3,3,q);
 return 0;
 }
