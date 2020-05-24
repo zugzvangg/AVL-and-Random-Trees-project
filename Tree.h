@@ -40,11 +40,14 @@ template <typename T>double Tree<T>::TESTING_INSERT(int n)
     for(int i=0; i<n; i++) {
         INSERT(i);
     }
-    time=t.elapsed();
     cout << "Time of inserting of " << n << " elements is " <<  t.elapsed() << " s "<< endl;
     Timer a;
     INSERT(n);
+    time=a.elapsed();
     cout << "Time of inserting of 1 element into the tree of " << n << " elements is " << a.elapsed() << " ms " << endl<<endl;
+    for(int i=0; i<n+1; i++) {
+        DELETE(i);
+    }
     return time;
 }         //insertion test
 
