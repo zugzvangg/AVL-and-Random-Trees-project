@@ -4,6 +4,7 @@
 #include "Timer.h"
 #include <fstream>
 #include "AVL_Node.h"
+#include "rndm_tree.h"
 #include <iostream>
 #include <memory>
 #include <vector>
