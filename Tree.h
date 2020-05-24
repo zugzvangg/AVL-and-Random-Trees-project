@@ -4,7 +4,6 @@
 #include "Timer.h"
 #include <fstream>
 #include "AVL_Node.h"
-#include "rndm_tree.h"
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -13,8 +12,8 @@
 #include <algorithm>
 #include <iomanip>
 using namespace std;
-template <typename T>
-class Tree {
+
+template <typename T> class Tree {
 public:
 //interface methods;
     virtual T FIND_MIN_ELEMENT(){};                          //minimal element
@@ -23,13 +22,13 @@ public:
     virtual void INSERT(T data){};                           //insertion
     virtual void DELETE(T data){};                           //deleting
 //interface tests //enter amount of elements for every test
-    virtual double TESTING_INSERT(int n) final;
-    virtual double TESTING_DELETING(int n) final;
-    virtual double TESTING_MAX_ELEMENT(int n) final;
-    virtual double TESTING_MIN_ELEMENT(int n) final;
-    virtual double TESTING_FINDING_ELEMENT(int n) final;
+    virtual double TESTING_INSERT(int n);
+    virtual double TESTING_DELETING(int n);
+    virtual double TESTING_MAX_ELEMENT(int n);
+    virtual double TESTING_MIN_ELEMENT(int n);
+    virtual double TESTING_FINDING_ELEMENT(int n);
 //interface output of testing data
-    virtual void MEGA_BANG(int start,int step, int cycles) final; //the biggest *ucking test ever with output!
+    virtual void MEGA_BANG(int start,int step, int cycles); //the biggest *ucking test ever with output!
     //first input starting number of elements, then amount of adding elements pers step, then amount of these steps.
 };
 //test funcs declaration
