@@ -16,16 +16,6 @@ int main() {
     cout<< "creating"<<endl;
 AVL<int> a;
 RandomTree <int>b(10);
-b.INSERT(b.getRoot(), 6);
-b.INSERT(b.getRoot(), 8);
-b.INSERT(b.getRoot(), 1);
-b.INSERT(b.getRoot(), 10);
-b.INSERT(b.getRoot(), 12);
-b.INSERT(b.getRoot(), 50);
-b.DELETE(b.getRoot(), 8);
-b.DELETE(b.getRoot(), 6);
-//b.MEGA_BANG(1000, 20, 1100);
-a.MEGA_BANG(1000, 20, 1000);
-
+a.MEGA_BANG(10,10,100);
 return 0;
 }
