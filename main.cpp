@@ -13,11 +13,13 @@
 using namespace std;
 int main() {
     cout<< "Tree test!"<<endl;
-    cout<< "creating"<<endl;
+    RandomTree<int> b(0);
 AVL<int> a;
-RandomTree<int> b(10);
-b.TESTING_INSERT(10);
-b.TESTING_DELETING(100);
-b.MEGA_BANG(100,100,100);
+a.insert({228,322,1337,1,2,3,4,5,6,7,8,9,10});
+a.Print_beauty();
+b.INSERT(b.getRoot(),2);
+b.INSERT(b.getRoot(),3);
+b.INSERT(b.getRoot(),4);
+b.Print_beauty();
 return 0;
 }
