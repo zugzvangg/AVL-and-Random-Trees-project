@@ -39,13 +39,11 @@ template <typename T>double Tree<T>::TESTING_INSERT(int n)
     for(int i=0; i<n; i++) {
         INSERT(i);
     }
-    double time=t.elapsed();
-    cout << "Time of inserting of " << n << " elements is " <<  time << " s "<< endl;
+    cout << "Time of inserting of " << n << " elements is " <<  t.elapsed() << " s "<< endl;
     Timer a;
     INSERT(n);
-    time=a.elapsed();
-    cout << "Time of inserting of 1 element into the tree of " << n << " elements is " << time << " ms " << endl<<endl;
-    return time;
+    cout << "Time of inserting of 1 element into the tree of " << n << " elements is " << a.elapsed() << " ms " << endl<<endl;
+    return a.elapsed();
 }         //insertion test
 
 template <typename T>double Tree<T>::TESTING_DELETING(int n)
@@ -56,13 +54,8 @@ template <typename T>double Tree<T>::TESTING_DELETING(int n)
     Timer a;
     INSERT(n);
     DELETE(n-1);
-    double time=a.elapsed();
-    cout << "Time of deleting of an element is " << time  << "ms" << endl<<endl;
-    for(int i=0; i<n-1; i++) {
-        DELETE(i);
-    }
-    DELETE(n);
-    return time;
+    cout << "Time of deleting of an element is " << a.elapsed()  << "ms" << endl<<endl;
+    return a.elapsed();
 }        //deleting test
 
 template <typename T>double Tree<T>::TESTING_MAX_ELEMENT(int n)
@@ -73,12 +66,8 @@ template <typename T>double Tree<T>::TESTING_MAX_ELEMENT(int n)
     }
     Timer a;
     FIND_MAX_ELEMENT();
-    double time=a.elapsed();
-    cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  time << "s"<< endl;
-    for(int i=0; i<n; i++) {
-        DELETE(i);
-    }
-    return time;
+    cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
+    return a.elapsed();
 }     //max test
 
 template <typename T>double Tree<T>::TESTING_MIN_ELEMENT(int n)
@@ -89,12 +78,8 @@ template <typename T>double Tree<T>::TESTING_MIN_ELEMENT(int n)
     }
     Timer a;
     FIND_MIN_ELEMENT();
-    double time=a.elapsed();
-    cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  time << "s"<< endl;
-    for(int i=0; i<n; i++) {
-        DELETE(i);
-    }
-    return time;
+    cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
+    return a.elapsed();
 }     //min test
 
 template <typename T>double Tree<T>::TESTING_FINDING_ELEMENT(int n)
@@ -105,12 +90,8 @@ template <typename T>double Tree<T>::TESTING_FINDING_ELEMENT(int n)
     }
     Timer a;
     FIND_NODE(n-1);
-    double time=a.elapsed();
-    cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  time << "s"<< endl;
-    for(int i=0; i<n; i++) {
-        DELETE(i);
-    }
-    return time;
+    cout << "Time of finding of a needed element in a tree of " << n << " elements is " <<  a.elapsed() << "s"<< endl;
+    return a.elapsed();
 } //search test
 
 template <typename T>void Tree<T>::MEGA_BANG(int start,int step, int cycles){
