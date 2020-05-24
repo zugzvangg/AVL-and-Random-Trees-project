@@ -296,7 +296,7 @@ public:
     } //total checkout! outputting into "info.dat"
     //doing beautiful pic
     void Print_beauty(){
-        print_tree(this->root);
+        print_tree(this->root->r);
     };
 
 };

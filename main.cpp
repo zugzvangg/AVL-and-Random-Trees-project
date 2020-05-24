@@ -15,11 +15,12 @@ int main() {
     cout<< "Tree test!"<<endl;
     RandomTree<int> b(0);
 AVL<int> a;
-a.insert({228,322,1337,1,2,3,4,5,6,7,8,9,10});
-a.Print_beauty();
-b.INSERT(b.getRoot(),2);
-b.INSERT(b.getRoot(),3);
-b.INSERT(b.getRoot(),4);
+for(int i=0;i<20;++i){
+    b.INSERT(b.getRoot(),i);
+    a.INSERT(228*i);
+}
 b.Print_beauty();
+cout<<endl;
+a.Print_beauty();
 return 0;
 }
